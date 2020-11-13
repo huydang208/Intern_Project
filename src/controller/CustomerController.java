@@ -45,6 +45,12 @@ public class CustomerController extends HttpServlet {
 
 		try {
 			switch (action) {
+			case "/new":
+				showNewForm(request, response);
+				break;
+			case "/edit":
+				showEditForm(request, response);
+				break;
 			case "/list":
 				listCustomer(request, response);
 				break;
@@ -72,11 +78,26 @@ public class CustomerController extends HttpServlet {
 	}
 
 
+	private void showNewForm(HttpServletRequest request, HttpServletResponse response) 
+			throws SQLException, IOException, ServletException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("customers/customers-form.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		int idCustomers = Integer.parseInt(request.getParameter("idCustomers"));
+		Customers existingTodo = customersDAO.getById(idCustomers);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("customers/customers-form.jsp");
+		request.setAttribute("todo", existingTodo);
+		dispatcher.forward(request, response);
+	}
+
 	private void detailCustomers(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		int idCustomers = Integer.parseInt(request.getParameter("idCustomers"));
 		Customers existingCustomers = customersDAO.getById(idCustomers);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("customers/customers-form.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("customers/customers-list.jsp");
 		request.setAttribute("customers", existingCustomers);
 		dispatcher.forward(request, response);
 		
