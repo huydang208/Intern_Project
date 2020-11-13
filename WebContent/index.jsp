@@ -5,9 +5,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>@{title}</title>
 </head>
 <body>
-	<jsp:forward page="customers-list.jsp"></jsp:forward>
+	<jsp:forward page="customers/customers-list.jsp"></jsp:forward>
 </body>
 </html>

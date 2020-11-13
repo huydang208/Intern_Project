@@ -25,7 +25,7 @@ import model.Customers;
  * @email Ramesh Fadatare
  */
 
-@WebServlet("/")
+@WebServlet("")
 public class CustomerController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private CustomersDAO customersDAO;
@@ -87,9 +87,9 @@ public class CustomerController extends HttpServlet {
 	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		int idCustomers = Integer.parseInt(request.getParameter("idCustomers"));
-		Customers existingTodo = customersDAO.getById(idCustomers);
+		Customers existingCustomers = customersDAO.getById(idCustomers);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("customers/customers-form.jsp");
-		request.setAttribute("todo", existingTodo);
+		request.setAttribute("customers", existingCustomers);
 		dispatcher.forward(request, response);
 	}
 
