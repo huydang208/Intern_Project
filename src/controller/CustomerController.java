@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import DAO.CustomersDAO;
 import DAO.ImplCustomerDAO;
 import model.Customers;
-import net.javaguides.todoapp.model.Todo;
 
 
 
@@ -108,7 +106,7 @@ public class CustomerController extends HttpServlet {
 		int salesRepEmployeeNumber = Integer.parseInt(request.getParameter("salesRepEmployeeNumber"));
 		float creditLimit = Float.parseFloat(request.getParameter("creditLimit"));
 		
-		boolean insertCustomers = Boolean.valueOf(request.getParameter("insertCustomers"));
+		boolean insert = Boolean.valueOf(request.getParameter("insert"));
 		Customers customers = new Customers(customerNumber, customerName, contactLastName, contactFirstName, phone,
 				addressLine1, addressLine2, city, state, postalCode, country, salesRepEmployeeNumber, creditLimit);
 		customersDAO.insert(customers);
@@ -140,8 +138,8 @@ public class CustomerController extends HttpServlet {
 	}
 
 	private void deleteCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		CustomerDAO.deleteCustomer(id);
+		int idCustomers = Integer.parseInt(request.getParameter("idCustomers"));
+		customersDAO.delete(idCustomers);
 		response.sendRedirect("list");
 	}
 	
